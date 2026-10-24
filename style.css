@@ -1,0 +1,152 @@
+#nmlp-launcher {
+  position: fixed !important; right: 22px !important; bottom: 22px !important; z-index: 2147483647 !important;
+  border: 1px solid #777 !important; border-radius: 24px !important; padding: 12px 18px !important;
+  background: #e50914 !important; color: white !important; font: 700 14px/1.2 Arial,sans-serif !important;
+  cursor: pointer !important; box-shadow: 0 4px 18px #0008 !important;
+}
+#nmlp-panel, #nmlp-panel * { box-sizing: border-box; }
+#nmlp-panel {
+  --nmlp-card-width: 150px;
+  position: fixed; inset: 3vh 2vw 3vh 2vw; z-index: 2147483646;
+  display: flex; flex-direction: column; gap: 12px; padding: 18px;
+  background: #111; color: #f4f4f4; border: 1px solid #555; border-radius: 14px;
+  box-shadow: 0 10px 60px #000c; font: 14px/1.4 Arial,sans-serif;
+}
+.nmlp-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.nmlp-heading { font-size: 22px; font-weight: 700; }
+.nmlp-close { background:transparent; color:white; border:0; font-size:30px; cursor:pointer; }
+.nmlp-note, .nmlp-help { margin:0; color:#bbb; font-size:12px; }
+.nmlp-search, .nmlp-select, .nmlp-custom-input {
+  min-width:0; padding:10px 12px; color:#fff; background:#242424; border:1px solid #555; border-radius:6px;
+}
+.nmlp-search { width:100%; }
+.nmlp-controls { display:flex; gap:8px; }
+.nmlp-select { flex:1; }
+.nmlp-size-row { display:flex; align-items:center; }
+.nmlp-size-row label { display:flex; align-items:center; gap:12px; color:#ccc; }
+.nmlp-size-row input { width:220px; }
+.nmlp-add-row { display:flex; gap:8px; }
+.nmlp-custom-input { flex:1; }
+.nmlp-action, .nmlp-small-btn {
+  color:#fff; background:#333; border:1px solid #666; border-radius:5px; padding:7px 10px; cursor:pointer;
+}
+.nmlp-count { color:#bbb; font-size:12px; }
+.nmlp-grid {
+  flex:1; min-height:0; overflow:auto; display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(var(--nmlp-card-width),1fr)); gap:14px;
+  align-content:start; padding:2px 4px 20px 2px;
+}
+.nmlp-card { min-width:0; background:#1c1c1c; border:1px solid #333; border-radius:8px; padding:7px; }
+.nmlp-card.nmlp-selected { border:2px solid #e50914; }
+.nmlp-poster-link { display:block; }
+.nmlp-poster-link img { display:block; width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:4px; background:#333; }
+.nmlp-title { margin-top:7px; font-weight:700; font-size:13px; overflow-wrap:anywhere; }
+.nmlp-tags { min-height:17px; margin-top:4px; color:#bbb; font-size:11px; overflow-wrap:anywhere; }
+.nmlp-card-actions { display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; }
+.nmlp-small-btn { font-size:11px; }
+.nmlp-status { min-width:0; max-width:100%; color:#fff; background:#333; border:1px solid #555; border-radius:4px; font-size:11px; }
+.nmlp-empty { grid-column:1/-1; max-width:800px; padding:20px; color:#ddd; background:#222; border-radius:8px; line-height:1.7; }
+@media (max-width: 650px) {
+  #nmlp-panel { inset:1vh 1vw; padding:10px; }
+  .nmlp-heading { font-size:17px; }
+  .nmlp-controls { flex-wrap:wrap; }
+}
+.nmlp-bulk-row { display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+.nmlp-bulk-status { color:#bbb; font-size:12px; }
+.nmlp-action:disabled { opacity:.55; cursor:wait; }
+
+.nmlp-head-actions { display:flex; align-items:center; gap:10px; }
+.nmlp-collapse {
+  padding:7px 11px; color:#eee; background:#292929; border:1px solid #555;
+  border-radius:6px; cursor:pointer; font-size:12px; white-space:nowrap;
+}
+.nmlp-toolbar {
+  display:flex; flex-direction:column; gap:12px; padding:0 0 4px;
+  border-bottom:1px solid #333;
+}
+.nmlp-toolbar[hidden] { display:none !important; }
+
+.nmlp-title-limit-row { display:flex; align-items:center; gap:8px; color:#ccc; font-size:12px; }
+.nmlp-title-limit-row label { display:flex; align-items:center; gap:8px; }
+.nmlp-title-limit { width:82px; padding:7px 8px; color:#fff; background:#242424; border:1px solid #555; border-radius:5px; }
+.nmlp-tag-manage-row { display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+.nmlp-selection-info { color:#bbb; font-size:12px; }
+.nmlp-card.nmlp-selected { border:2px solid #e50914; box-shadow:0 0 0 1px #e50914; }
+.nmlp-title { line-height:1.35; }
+.nmlp-size-row { flex:0 0 auto; padding:2px 0 4px; }
+
+/* v1.7: landscape thumbnails, metadata, memo and ratings */
+.nmlp-poster-link img { aspect-ratio:16/9; object-fit:cover; }
+.nmlp-metadata { margin-top:5px; color:#bdbdbd; font-size:11px; line-height:1.35; min-height:15px; }
+.nmlp-rating-section { margin-top:7px; display:flex; flex-direction:column; gap:4px; }
+.nmlp-rating-stars { display:flex; align-items:center; gap:1px; }
+.nmlp-star { border:0; padding:0 1px; background:transparent; color:#666; font-size:18px; line-height:1.1; cursor:pointer; }
+.nmlp-star-active { color:#ffd43b; }
+.nmlp-star-half { background:linear-gradient(90deg,#ffd43b 50%,#666 50%); color:transparent; -webkit-background-clip:text; background-clip:text; }
+.nmlp-rating-controls { display:flex; align-items:center; gap:6px; }
+.nmlp-rating-range { min-width:0; flex:1; width:100%; accent-color:#ffd43b; }
+.nmlp-rating-number { width:54px; padding:4px; color:#fff; background:#242424; border:1px solid #555; border-radius:4px; font-size:11px; }
+.nmlp-memo-wrap { display:flex; flex-direction:column; gap:5px; margin-top:7px; }
+.nmlp-memo { width:100%; min-height:74px; resize:vertical; padding:7px; color:#fff; background:#242424; border:1px solid #555; border-radius:5px; font:12px/1.4 Arial,sans-serif; }
+.nmlp-memo[hidden] { display:none !important; }
+.nmlp-rating-mode-row { display:flex; align-items:center; color:#ccc; font-size:12px; }
+.nmlp-rating-mode { max-width:250px; margin-left:10px; }
+
+/* v1.8.1: keep cards visible if Netflix lazy-loads artwork or omits its URL */
+.nmlp-poster-link img.nmlp-image-missing { visibility: visible; object-fit: contain; background: #333; }
+
+
+/* v1.8.3: keep one search box and poster-size control in the header */
+.nmlp-head { min-width:0; }
+.nmlp-head-actions { min-width:0; display:flex; align-items:center; gap:10px; }
+.nmlp-header-search { width:clamp(280px, 44vw, 560px); flex:0 1 560px; }
+.nmlp-size-row.nmlp-header-size { padding:0; flex:0 0 auto; }
+.nmlp-header-size label { gap:6px; white-space:nowrap; font-size:12px; }
+.nmlp-header-size input { width:clamp(70px, 9vw, 120px); }
+@media (max-width: 900px) {
+  .nmlp-head { align-items:flex-start; flex-wrap:wrap; }
+  .nmlp-head-actions { flex-wrap:wrap; justify-content:flex-end; }
+  .nmlp-header-search { width:360px; flex-basis:360px; }
+}
+@media (max-width: 650px) {
+  .nmlp-head-actions { justify-content:flex-start; gap:6px; }
+  .nmlp-header-search { width:300px; flex-basis:300px; }
+  .nmlp-header-size label { font-size:11px; }
+  .nmlp-header-size input { width:70px; }
+}
+
+/* v1.8.7: total-season visibility setting */
+.nmlp-season-display-row { display:flex; align-items:center; color:#ccc; font-size:12px; }
+.nmlp-season-display-row label { display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+.nmlp-show-total-seasons { accent-color:#e50914; }
+
+
+/* v1.9.2: compact combined bulk watch-status / hide action */
+.nmlp-bulk-status-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.nmlp-bulk-status-label { display:flex; align-items:center; flex-wrap:wrap; gap:8px; color:#ccc; font-size:12px; }
+.nmlp-bulk-status-select { min-width:190px; }
+.nmlp-bulk-status-row .nmlp-action { white-space:nowrap; }
+
+
+/* v1.9.3: compact frequently used settings into a horizontal row */
+.nmlp-compact-settings-row {
+  display:flex; align-items:center; flex-wrap:wrap; gap:10px 18px;
+  padding:2px 0;
+}
+.nmlp-compact-settings-row > * { min-width:0; }
+.nmlp-compact-settings-row .nmlp-bulk-status-row { flex:0 1 auto; }
+.nmlp-compact-settings-row .nmlp-bulk-status-select { min-width:160px; max-width:220px; }
+.nmlp-compact-settings-row .nmlp-title-limit-row { flex:0 1 auto; }
+.nmlp-compact-settings-row .nmlp-title-limit-row label { gap:6px; white-space:nowrap; }
+.nmlp-compact-settings-row .nmlp-title-limit { width:64px; }
+.nmlp-compact-settings-row .nmlp-rating-mode-row { flex:0 1 auto; }
+.nmlp-compact-settings-row .nmlp-rating-mode { max-width:180px; margin-left:6px; }
+.nmlp-compact-settings-row .nmlp-season-display-row { flex:0 0 auto; }
+@media (max-width: 900px) {
+  .nmlp-compact-settings-row { gap:8px 12px; }
+}
+@media (max-width: 650px) {
+  .nmlp-compact-settings-row { align-items:flex-start; flex-direction:column; gap:9px; }
+  .nmlp-compact-settings-row .nmlp-bulk-status-row { width:100%; }
+  .nmlp-compact-settings-row .nmlp-bulk-status-select { max-width:none; flex:1; }
+}
